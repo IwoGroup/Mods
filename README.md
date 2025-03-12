@@ -2,7 +2,7 @@ Instrukcja:
 
 1. USB z linuxem
 2. Wklej pliki z home.zip: https://drive.google.com/file/d/1hxMrx7cYtj3ogjFBUt2ntjFYqsCU3756/view?usp=drive_link
-3. (zaktualizuj pliki
+3. (zaktualizuj pliki)
 4. Włącz ./full.sh
 5. Done
 
