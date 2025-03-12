@@ -11,11 +11,29 @@ Instrukcja:
 Wymagania:
 "Mods + Mats" (najlepiej używać gdy występuje kod 43 a karta jest wykrywana)
 - dodatkowa karta graficzna
-- testowana karta nie może mieć LHR !!!
+- nie działa z LHR
 
-"test178"
+test2
+- nie działa z LHR
+
+test94
+- nie działa z LHR
+
+test108
+- nie działa z LHR
+
+test178
+- nie działa z LHR
 - karta w slocie pcie x16
 
+test295
+- nie działa z LHR
+
+test niemca
+- nie działa z LHR
+
+test chinczyka
+- nie działa z LHR
 
 
 
