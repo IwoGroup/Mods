@@ -29,7 +29,7 @@ echo "Wpisz inne:"
 echo "wykonaj_test2, wykonaj_test108, wykonaj_test295, wykonaj_test_niemca, wykonaj_test_chinczyka, yo"
 echo " "
 echo "q. Back"
-echo "w. Quit"
+echo "w. Power off"
 read choice
 case $choice in
 	1)
@@ -77,7 +77,7 @@ done
 wykonaj_mads() {
 	wykonaj_usun
 	clear
-	echo "Wybrano serie 1000"
+	echo "$seria"
 	sleep 1
 	cd $folder_mods
 	sleep 1
@@ -129,7 +129,7 @@ wykonaj_test2() {
 	clear
 	cd "$folder_mods"
 	sleep 0.5
-	./mods gputest.js -oqa -test 2 -run_on_error
+	./mods gputest.js -oqa -test 2
 	sleep 0.5
 	less mods.log
 }
@@ -139,7 +139,7 @@ wykonaj_test94() {
 	cd "$folder_mods"
 	pwd
 	sleep 3.5
-	./mods gputest.js -oqa -test 94 -dramclk_percent 100 -run_on_error
+	./mods gputest.js -oqa -test 94 -dramclk_percent 100
 	sleep 3.5
 	less mods.log
 }
@@ -148,7 +148,7 @@ wykonaj_test178() {
 	clear
 	cd "$folder_mods"
 	sleep 0.5
-	./mods gputest.js -oqa -test 178 -dramclk_percent 100 -run_on_error
+	./mods gputest.js -oqa -test 178 -dramclk_percent 100
 	sleep 0.5
 	less mods.log
 }
@@ -157,7 +157,7 @@ wykonaj_test108() {
 	clear
 	cd "$folder_mods"
 	sleep 1
-	./mods gputest.js -oqa -test 108 -dramclk_percent 100 -run_on_error
+	./mods gputest.js -oqa -test 108 -dramclk_percent 100
 	sleep 0.5
 	less mods.log
 }
@@ -166,7 +166,7 @@ wykonaj_test123() {
 	clear
 	cd "$folder_mods"
 	sleep 0.5
-	./mods gputest.js -oqa -test 123 -dramclk_percent 100 -run_on_error
+	./mods gputest.js -oqa -test 123 -dramclk_percent 100
 	sleep 0.5
 	less mods.log
 }
@@ -175,7 +175,7 @@ wykonaj_test295() {
 	clear
 	cd "$folder_mods"
 	sleep 0.5
-	./mods gputest.js -oqa -test 295 -dramclk_percent 100 -run_on_error
+	./mods gputest.js -oqa -test 295 -dramclk_percent 100
 	sleep 0.5
 	less mods.log
 }
@@ -184,7 +184,7 @@ wykonaj_test_niemca() {
 	clear
 	cd "$folder_mods"
 	sleep 0.5
-	./mods gputest.js -oqa -dramclk_percent 100 -run_on_error -matsinfo -poll_interrupts -rmkey RmPmgrPwrTopology2xSupport 1 -rmkey RmPmgrPwrPolicy3xSupport 1 -rmkey RmPmgrPwrPolicy3xLimitScale 100 -skip 147
+	./mods gputest.js -oqa -dramclk_percent 100 -matsinfo -poll_interrupts -rmkey RmPmgrPwrTopology2xSupport 1 -rmkey RmPmgrPwrPolicy3xSupport 1 -rmkey RmPmgrPwrPolicy3xLimitScale 100 -skip 147
 	sleep 0.5
 	less mods.log
 }
@@ -193,7 +193,7 @@ wykonaj_test_chinczyka() {
 	clear
 	cd "$folder_mods"
 	sleep 0.5
-	./mods gputest.js -oqa -dramclk_percent 100 -run_on_error -test 242 -test 19 -test 166 loops 5 -dramclk +1pct
+	./mods gputest.js -oqa -dramclk_percent 100 -test 242 -test 19 -test 166 loops 5 -dramclk +1pct
 	sleep 0.5
 	less mods.log
 }
