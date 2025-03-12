@@ -9,8 +9,9 @@ Instrukcja:
 
 
 Wymagania:
+
 "Mods + Mats" (najlepiej używać gdy występuje kod 43 a karta jest wykrywana)
-- dodatkowa karta graficzna
+- dodatkowa karta graficzna wymagana (dedykowana) mats z integrą ma złe ustawienia
 - nie działa z LHR
 
 test2
