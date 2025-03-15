@@ -11,7 +11,7 @@ Instrukcja:
 Wymagania:
 
 "Mods + Mats" (należy używać gdy występuje kod 43 a karta jest wykrywana)
-- test słyżu do wstępnej diagnozy - jeżeli pamięci są uszkodzone to inne testy się nie odpalą
+- test służu do wstępnej diagnozy - jeżeli pamięci są uszkodzone to inne testy się nie odpalą
 - dodatkowa karta graficzna wymagana (dedykowana) mats z integrą ma złe ustawienia
 - nie działa z LHR
 
