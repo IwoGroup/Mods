@@ -10,7 +10,8 @@ Instrukcja:
 
 Wymagania:
 
-"Mods + Mats" (najlepiej używać gdy występuje kod 43 a karta jest wykrywana)
+"Mods + Mats" (należy używać gdy występuje kod 43 a karta jest wykrywana)
+- test słyżu do wstępnej diagnozy - jeżeli pamięci są uszkodzone to inne testy się nie odpalą
 - dodatkowa karta graficzna wymagana (dedykowana) mats z integrą ma złe ustawienia
 - nie działa z LHR
 
@@ -37,6 +38,15 @@ test chinczyka
 - nie działa z LHR
 
 
+```
+Error code:
+505 - Memory adress training  - uszkodzona pamięć
+
+```
+
+
+
+
 
 
 ```                                                                            
@@ -60,3 +70,5 @@ Mr. Niemiec
 Mr. Chińczyk
 
 Mr. od Snake
+
+Mr. od Bad Apple
