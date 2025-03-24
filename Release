@@ -4,6 +4,11 @@ __________       .__
  |    |   \  ___/|  |_\  ___/ / __ \_\___ \\  ___/ 
  |____|_  /\___  >____/\___  >____  /____  >\___  >
         \/     \/          \/     \/     \/     \/ 
+Ver. 1.8.4
+- dodanie opcji samego modsa
+- lekka poprawka menu testów
+- dodanie opcji exit
+
 ========================================================
 Ver. 1.8.3
 - usuwanie teraz oczyszcza wszystkie foldery z plików txt i log
@@ -72,12 +77,10 @@ ___________      ________
   |____| \____/  /_______  /\____/  \/ 
 
         
-- Zmiana nazwenictwa wersji na bardziej poprawną https://semver.org/
-- Dodanie TUI
 - Dodanie muzyczki po wykonanym teście - https://github.com/ShaneMcC/beeps
-- Test Serii 5000
-- Dodanie kolorów do menu
+- Test Serii 5000 nvidia
 - Dodanie startu testo po nazwie kodowej rdzenia. 
 - dodać badapple - https://github.com/Error916/Bad_Apple_frames https://www.reddit.com/r/unixporn/comments/n13r71/bad_apple_on_linux_terminal_dwm/
 - auto wykrywanie karty i szukanie odpowiedniego folderu na jej podstawie
 - dodanie zmiennych z róźnymi testami
+- tmux - statyczne biblioteki i instalacja na tinylinux - kilka okien

@@ -43,7 +43,7 @@ status_bar(){
 }
 
 rand_block(){
-  ((blockX=SRANDOM%COLS+1)); ((blockY=SRANDOM%ROWS+1)); block="$blockY;$blockX"
+  ((blockX=RANDOM%COLS+1)); ((blockY=RANDOM%ROWS+1)); block="$blockY;$blockX"
   printf '\e[%sH\e[41m \e[m' "$block"
 }
 
@@ -67,7 +67,7 @@ self_collision(){ [[ $1 == "${snake[-1]}" ]]&& game_over 4 1; }
 
 wall_collision(){ (( $1 < 1|| $1 > COLS|| $2 < 1|| $2 > ROWS ))&& game_over 4 1; }
 
-len=3 delay=20
+len=5 delay=10
 init_term
 for((;;)){
   status_bar "$snakeX" "$snakeY" "$len" "$delay"

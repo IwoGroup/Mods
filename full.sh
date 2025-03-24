@@ -1,12 +1,35 @@
 #!/bin/bash
 
 wykonaj_testowo() {
-	echo "123"
-	sleep 4
+	folder_mods="466.107-3060-3070ti"
+	seria="Seria 3000: GA104 (3060, 3060 Ti, 3070, 3070 Ti)"
+	folder_nvmt="nvmt34"			
+	wykonaj_usun
 	clear
+	echo "$seria"
+	sleep 1
+	cd $folder_mods
+	sleep 1
+	./mods gputest.js -oqa -test 94 -dramclk_percent 100
+	sleep 1
+	cd ..
+	cd $folder_nvmt
+	./mt.sh
+	sleep 1
+	cp -r mt.log ../mods_$(date +%Y-%m-%d_%H-%M-%S).log
+	sleep 1
+	rm mt.log
+	sleep 1
+	cd ..
+	cd $folder_mods
+	cp -r mods.log ../mods2_$(date +%Y-%m-%d_%H-%M-%S).log
+	sleep 1
+	rm mods.log
+	sleep 1
+	poweroff
 }
 
-wykonaj_usun() {
+wykonaj_usun() { #usuwa logi w danum folderze
 	clear
 	rm *.txt *.log
 	clear
@@ -21,15 +44,21 @@ echo "$seria"
 echo " "
 echo "Wybierz Test:"
 echo "1. Mods & Mats"
-echo "2. Test 94"
-echo "3. Test 176 (wymaga karty w slocie pcie x16)"
-echo "4. Test 123"
-echo " "
-echo "Wpisz inne:"
-echo "wykonaj_test2, wykonaj_test108, wykonaj_test295, wykonaj_test_niemca, wykonaj_test_chinczyka, yo"
+echo "2. Mods"
+echo "3. Test 94"
+echo "4. Test 178 memory stress test (wymaga pci 16x)"
+echo "=========================================="
+echo "5. Test 123 - do dopracowania"
+echo "6. Test 108 - do dopracowania"
+echo "7. Test 2 - do dopracowania"
+echo "8. Test 295 - do dopracowania"
+echo "9. Test niemca - do dopracowania"
+echo "10. Test chinczyka - do dopracowania"
+echo "11. yo"
 echo " "
 echo "q. Back"
 echo "w. Power off"
+echo "e. Exit"
 read choice
 case $choice in
 	1)
@@ -37,17 +66,51 @@ case $choice in
 		sleep 1
 		;;
 	2)
+		wykonaj_mods
+		sleep 1
+		;;
+	3)
 		wykonaj_test94
 		sleep 1
 		cd ..
 		;;
-	3)
+	4)
 		wykonaj_test178
 		sleep 1
 		cd ..
 		;;
-	4)
+	5)
 		wykonaj_test123
+		sleep 1
+		cd ..
+		;;
+	6)
+		wykonaj_test108
+		sleep 1
+		cd ..
+		;;
+	7)
+		wykonaj_test2
+		sleep 1
+		cd ..
+		;;
+	8)
+		wykonaj_test295
+		sleep 1
+		cd ..
+		;;
+	9)
+		wykonaj_test_niemca
+		sleep 1
+		cd ..
+		;;
+	10)
+		wykonaj_test_chinczyka
+		sleep 1
+		cd ..
+		;;
+	11)
+		yo
 		sleep 1
 		cd ..
 		;;
@@ -57,13 +120,14 @@ case $choice in
 	w)
 		poweroff
 		;;
-	cd)
-		cd ..
+	e)
+		Exit
 		;;
 	*)
 		if declare -f "$choice" > /dev/null 2>&1; 
 			then
 			echo "Wywoluje funkcje: $choice"
+			sleep 1
 			$choice
 			else
 			echo "Nie znaleziono funkcji o nazwie: $choice"
@@ -105,7 +169,34 @@ wykonaj_mads() {
 	poweroff
 }
 
-wykonaj_5090() {
+wykonaj_mods() {
+	wykonaj_usun #usuwa logi z folderu home
+	clear
+	echo "$seria"
+	sleep 1
+	cd $folder_mods
+	sleep 1
+	./mods gputest.js -skip_rm_state_init -oqa
+	sleep 1
+	cp -r mods.log ../mods_$(date +%Y-%m-%d_%H-%M-%S).log
+	sleep 1
+	cd ..
+	cd $folder_nvmt
+	./mt.sh
+	sleep 1
+	cp -r mt.log ../mt_$(date +%Y-%m-%d_%H-%M-%S).log
+	sleep 1
+	rm mt.log
+	sleep 1
+	cd ..
+	cd $folder_mods
+	sleep 1
+	rm mods.log
+	sleep 1
+	poweroff
+}
+
+wykonaj_5090() { #brak
 	wykonaj_usun
 	clear
 	echo "no jeszcze tego nie ma :("
@@ -197,7 +288,6 @@ wykonaj_test_chinczyka() {
 	sleep 0.5
 	less mods.log
 }
-
 
 yo() {
 	clear
@@ -301,14 +391,14 @@ while true; do
 					echo "Seria 4000"
 					echo " "
 					echo "Wybierz:"
-					echo "1. AD104 (4060 Ti, 4070, 4070 Ti, 4080)"
+					echo "1. AD102 AD104 (4060 Ti, 4070, 4070 Ti, 4080, 4090)"
 					echo "2. AD103 (4070 Super Ti)"
 					echo "q. Back"
 					read choice
 					case $choice in
 						1)
 							folder_mods="520.175-4060ti-4080"
-							seria="Seria 4000: AD104 (4060 Ti, 4070, 4070 Ti, 4080)"
+							seria="Seria 4000: AD102 AD104 (4060 Ti, 4070, 4070 Ti, 4080, 4090)"
 							folder_nvmt="nvmt34"
 							wykonaj_menu_test
 							;;
@@ -334,7 +424,11 @@ while true; do
 					;;
 				5) #seria 5 wykonaj_5090)
 					clear
-					echo "Brak"
+					echo "Brak. kick za: 3"
+					sleep 1
+					echo "Brak. kick za: 2"
+					sleep 1
+					echo "Brak. kick za: 1"
 					sleep 1
 					;;
 				q) 
@@ -425,7 +519,7 @@ while true; do
 			echo "Brak. kick za: 1"
 			sleep 1
 		;;
-	7) # tu dodaj menu Cała reszta#########################################################################)
+	7) # tu dodaj menu innych)
 		while true; do
 		clear
 		echo "Wybierz:"
@@ -438,6 +532,7 @@ while true; do
 		echo "7. Bad Apple"		
 		echo "q. Quit"
 		echo "w. Poweroff"
+		echo "e. Exit"
 		read choice
 			case $choice in
 				1)
@@ -462,6 +557,12 @@ while true; do
 				6)
 					szukanie
 					;;
+				7)
+					cd bad
+					./run.sh
+					sleep 0.5
+					cd /home
+					;;
 				q)
 					clear
 					break
@@ -470,10 +571,14 @@ while true; do
 					clear
 					poweroff
 					;;
+				e)
+					clear
+					Exit
+					;;
 				*)
 					clear
 					echo "Nope"
-					sleep 0.3
+					sleep 0.5
 				;;
 			esac
 		done
@@ -508,7 +613,11 @@ while true; do
 	w)
 		clear
 		poweroff
-		;;	
+		;;
+	e)
+		clear
+		Exit
+		;;
 	*)
 		clear
 		echo "Nope"
