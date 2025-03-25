@@ -112,7 +112,6 @@ case $choice in
 	11)
 		yo
 		sleep 1
-		cd ..
 		;;
 	q)
 		break
@@ -334,7 +333,7 @@ while true; do
 			case $choice in
 				1) #seria 1)
 					folder_mods="367.56-10xx"
-					seria="Seria 1000 GP102, GP104, GP106, GP107, GP108"	
+					seria="Seria 1000: GP102, GP104, GP106, GP107, GP108"	
 					folder_nvmt="nvmt1"	
 					wykonaj_menu_test
 					;;
@@ -448,15 +447,8 @@ while true; do
 	2) # menu AMD)
 #		while true; do
 				clear
-				echo "       d8888 888b     d888 8888888b.  "
-				echo "      d88888 8888b   d8888 888  'Y88b "
-				echo "     d88P888 88888b.d88888 888    888 "
-				echo "    d88P 888 888Y88888P888 888    888 "
-				echo "   d88P  888 888 Y888P 888 888    888 "
-				echo "  d88P   888 888  Y8P  888 888    888 "
-				echo " d8888888888 888   '   888 888  .d88P "
-				echo "d88P     888 888       888 8888888P'  "            
-				echo " "   
+				cat Radeon
+				echo " "
 				echo "Brak. kick za: 3"
 				sleep 1
 				echo "Brak. kick za: 2"
@@ -503,14 +495,7 @@ while true; do
 		;;
 	3) # menu Intel)
 			clear
-			echo "8888888          888            888 "
-			echo "  888            888            888 "
-			echo "  888            888            888 "
-			echo "  888   88888b.  888888 .d88b.  888 "
-			echo "  888   888 '88b 888   d8P  Y8b 888 "
-			echo "  888   888  888 888   88888888 888 "
-			echo "  888   888  888 Y88b. Y8b.     888 "
-			echo "8888888 888  888  'Y888 'Y8888  888 "
+			cat Intel
 			echo " "
 			echo "Brak. kick za: 3"
 			sleep 1
