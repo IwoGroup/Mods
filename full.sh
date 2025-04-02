@@ -1,35 +1,20 @@
-#!/bin/bash
+./#!/bin/bash
 
 wykonaj_testowo() {
-	folder_mods="466.107-3060-3070ti"
-	seria="Seria 3000: GA104 (3060, 3060 Ti, 3070, 3070 Ti)"
-	folder_nvmt="nvmt34"			
-	wykonaj_usun
 	clear
-	echo "$seria"
+	cd "$folder_mods"
+	clear
+	echo "seria: $seria"
+	echo "folder: $folder_mods"
 	sleep 1
-	cd $folder_mods
-	sleep 1
-	./mods gputest.js -oqa -test 94 -dramclk_percent 100
-	sleep 1
-	cd ..
-	cd $folder_nvmt
-	./mt.sh
-	sleep 1
-	cp -r mt.log ../mods_$(date +%Y-%m-%d_%H-%M-%S).log
-	sleep 1
-	rm mt.log
-	sleep 1
-	cd ..
-	cd $folder_mods
-	cp -r mods.log ../mods2_$(date +%Y-%m-%d_%H-%M-%S).log
-	sleep 1
-	rm mods.log
-	sleep 1
-	poweroff
+	./mods gputest.js -oqa -test 1 -test 2 -test 3 -test 4 -test 5 -test 6 -test 7 -test 8 -test 9 -test 10
+	sleep 0.5
+	cp -r mods.log ../test3_$(date +%Y-%m-%d_%H-%M-%S).log
+	less mods.log
+	wykonaj_usun_log ## usuwa logi z tego folderu
 }
 
-wykonaj_usun() { #usuwa logi w danum folderze
+wykonaj_usun() { #usuwa logi w danym folderze
 	clear
 	rm *.txt *.log
 	clear
@@ -37,24 +22,40 @@ wykonaj_usun() { #usuwa logi w danum folderze
 	sleep 0.5
 }
 
+wykonaj_usun_log() { #usuwa log modsa
+	sleep 0.5
+	rm mods.log
+	clear
+	echo "kopia raportu jest w folderze home"
+	sleep 0.5
+	echo "3"
+	sleep 0.5
+	echo "2"
+	sleep 0.5
+	echo "1"
+	sleep 0.5
+}
+
 wykonaj_menu_test() {
 while true; do
 clear
-echo "$seria"
+echo " "
+echo "$seria" ##seria jest ustawiana przy wyborze odpowiedniej karty w menu
 echo " "
 echo "Wybierz Test:"
-echo "1. Mods & Mats"
-echo "2. Mods"
-echo "3. Test 94"
-echo "4. Test 178 memory stress test (wymaga pci 16x)"
-echo "=========================================="
-echo "5. Test 123 - do dopracowania"
-echo "6. Test 108 - do dopracowania"
-echo "7. Test 2 - do dopracowania"
-echo "8. Test 295 - do dopracowania"
-echo "9. Test niemca - do dopracowania"
-echo "10. Test chinczyka - do dopracowania"
-echo "11. yo"
+echo "1. Mods & Mats + Power Off"
+echo "2. Mods + Power Off"
+echo "3. Mats gpu 2 + Power Off"
+echo "   -------- wymaga obrazu z testowanego gpu --------"
+echo "4. Mats"
+echo "5. Test 2 - GLStress - ok 20s"
+echo "pl. Test 3 - MatsTest - ok 20s"
+echo "12. Test niczego - ..."
+echo "94. Test 94 - NewWfMats - ok 30s"
+echo "123. Test 123 - NewWfMatsBus - ok 30s"
+echo "178. Test 178 - WfMatsBgStress - stress test - ok 100s"
+echo "999. Testowo"
+echo "yo"
 echo " "
 echo "q. Back"
 echo "w. Power off"
@@ -62,54 +63,47 @@ echo "e. Exit"
 read choice
 case $choice in
 	1)
-		wykonaj_mads
-		sleep 1
+		wykonaj_mods_mats
 		;;
 	2)
 		wykonaj_mods
-		sleep 1
 		;;
 	3)
-		wykonaj_test94
-		sleep 1
-		cd ..
+		wykonaj_mats_n1
 		;;
 	4)
-		wykonaj_test178
-		sleep 1
+		wykonaj_mats
 		cd ..
 		;;
 	5)
-		wykonaj_test123
-		sleep 1
-		cd ..
-		;;
-	6)
-		wykonaj_test108
-		sleep 1
-		cd ..
-		;;
-	7)
 		wykonaj_test2
-		sleep 1
 		cd ..
 		;;
-	8)
-		wykonaj_test295
-		sleep 1
+	pl)
+		wykonaj_test3
 		cd ..
 		;;
-	9)
-		wykonaj_test_niemca
-		sleep 1
+	12)
+		wykonaj_test_nic
+		cd ..
+		;;	
+	94)
+		wykonaj_test94
 		cd ..
 		;;
-	10)
-		wykonaj_test_chinczyka
-		sleep 1
+	123)
+		wykonaj_test123
 		cd ..
 		;;
-	11)
+	178)
+		wykonaj_test178
+		cd ..
+		;;
+	999)
+		wykonaj_testowo
+		cd ..
+		;;
+	yo)
 		yo
 		sleep 1
 		;;
@@ -120,7 +114,7 @@ case $choice in
 		poweroff
 		;;
 	e)
-		Exit
+		exit
 		;;
 	*)
 		if declare -f "$choice" > /dev/null 2>&1; 
@@ -137,8 +131,8 @@ case $choice in
 done
 }
 
-wykonaj_mads() {
-	wykonaj_usun
+wykonaj_mods_mats() {
+	wykonaj_usun #usuwa logi z folderu - home w tym przypadku
 	clear
 	echo "$seria"
 	sleep 1
@@ -146,6 +140,7 @@ wykonaj_mads() {
 	sleep 1
 	./mods gputest.js -skip_rm_state_init -oqa
 	sleep 1
+	/home/tetris.sh
 	./mats -n 1 -e 5
 	sleep 1
 	cp -r report.txt ../mats_$(date +%Y-%m-%d_%H-%M-%S).txt
@@ -155,13 +150,13 @@ wykonaj_mads() {
 	cd $folder_nvmt
 	./mt.sh
 	sleep 1
-	cp -r mt.log ../mods_$(date +%Y-%m-%d_%H-%M-%S).log
+	cp -r mt.log ../mt_$(date +%Y-%m-%d_%H-%M-%S).log
 	sleep 1
 	rm mt.log
 	sleep 1
 	cd ..
 	cd $folder_mods
-	cp -r mods.log ../mods2_$(date +%Y-%m-%d_%H-%M-%S).log
+	cp -r mods.log ../mods_$(date +%Y-%m-%d_%H-%M-%S).log
 	sleep 1
 	rm mods.log
 	sleep 1
@@ -169,7 +164,7 @@ wykonaj_mads() {
 }
 
 wykonaj_mods() {
-	wykonaj_usun #usuwa logi z folderu home
+	wykonaj_usun #usuwa logi z folderu - home w tym przypadku
 	clear
 	echo "$seria"
 	sleep 1
@@ -195,6 +190,48 @@ wykonaj_mods() {
 	poweroff
 }
 
+wykonaj_mats_n1() {
+	wykonaj_usun #usuwa logi z folderu - home w tym przypadku
+	clear
+	echo "$seria"
+	sleep 1
+	cd $folder_mods
+	sleep 1
+	./mats -n 1 -e 5
+	sleep 1
+	cp -r report.txt ../mats_n1_$(date +%Y-%m-%d_%H-%M-%S).txt
+	sleep 1
+	rm report.txt
+	sleep 1
+	poweroff
+}
+wykonaj_mats() {
+	#wykonaj_usun #usuwa logi z folderu - home w tym przypadku
+	clear
+	echo "$seria"
+	sleep 1
+	cd $folder_mods
+	sleep 1
+	./mats -e 5
+	sleep 1
+	cp -r report.txt ../mats_$(date +%Y-%m-%d_%H-%M-%S).txt
+	sleep 1
+	clear
+	sleep 0.5
+	less report.txt
+	sleep 0.5
+	rm report.txt
+	clear
+	echo "kopia raportu jest w folderze home"
+	sleep 0.5
+	echo "3"
+	sleep 0.5
+	echo "2"
+	sleep 0.5
+	echo "1"
+	sleep 0.5
+}
+
 wykonaj_5090() { #brak
 	wykonaj_usun
 	clear
@@ -218,80 +255,93 @@ wykonaj_przypominajka() {
 wykonaj_test2() {
 	clear
 	cd "$folder_mods"
+	clear
+	echo "seria: $seria"
+	echo "folder: $folder_mods"
+	sleep 1
+	./mods gputest.js -oqa -test 2 -dramclk_percent 100 -loops 5
 	sleep 0.5
-	./mods gputest.js -oqa -test 2
-	sleep 0.5
+	cp -r mods.log ../test2_$(date +%Y-%m-%d_%H-%M-%S).log
 	less mods.log
+	wykonaj_usun_log ## usuwa logi z tego folderu
+}
+
+
+wykonaj_test3() {
+	clear
+	cd "$folder_mods"
+	clear
+	echo "seria: $seria"
+	echo "folder: $folder_mods"
+	sleep 1
+	./mods gputest.js -oqa -test 3 -dramclk_percent 100
+	sleep 0.5
+	cp -r mods.log ../test3_$(date +%Y-%m-%d_%H-%M-%S).log
+	less mods.log
+	wykonaj_usun_log ## usuwa logi z tego folderu
 }
 
 wykonaj_test94() {
 	clear
 	cd "$folder_mods"
-	pwd
-	sleep 3.5
-	./mods gputest.js -oqa -test 94 -dramclk_percent 100
-	sleep 3.5
-	less mods.log
-}
-
-wykonaj_test178() {
 	clear
-	cd "$folder_mods"
-	sleep 0.5
-	./mods gputest.js -oqa -test 178 -dramclk_percent 100
-	sleep 0.5
-	less mods.log
-}
-
-wykonaj_test108() {
-	clear
-	cd "$folder_mods"
+	echo "seria: $seria"
+	echo "folder: $folder_mods"
 	sleep 1
-	./mods gputest.js -oqa -test 108 -dramclk_percent 100
+	./mods gputest.js -oqa -test 94 -dramclk_percent 100
 	sleep 0.5
+	cp -r mods.log ../test94_$(date +%Y-%m-%d_%H-%M-%S).log
 	less mods.log
+	wykonaj_usun_log ## usuwa logi z tego folderu
 }
 
 wykonaj_test123() {
 	clear
 	cd "$folder_mods"
+	clear
+	echo "seria: $seria"
+	echo "folder: $folder_mods"
+	sleep 1
+	./mods gputest.js -oqa -test 123 -dramclk_percent 100 -loops 2
 	sleep 0.5
-	./mods gputest.js -oqa -test 123 -dramclk_percent 100
-	sleep 0.5
+	cp -r mods.log ../test123_$(date +%Y-%m-%d_%H-%M-%S).log
 	less mods.log
+	wykonaj_usun_log ## usuwa logi z tego folderu
 }
 
-wykonaj_test295() {
+wykonaj_test178() {
 	clear
 	cd "$folder_mods"
+	clear
+	echo "seria: $seria"
+	echo "folder: $folder_mods"
+	sleep 1
+	./mods gputest.js -oqa -test 178 -dramclk_percent 100
 	sleep 0.5
-	./mods gputest.js -oqa -test 295 -dramclk_percent 100
-	sleep 0.5
+	cp -r mods.log ../test178_$(date +%Y-%m-%d_%H-%M-%S).log
 	less mods.log
+	wykonaj_usun_log ## usuwa logi z tego folderu
 }
 
-wykonaj_test_niemca() {
+wykonaj_test_nic() {
 	clear
 	cd "$folder_mods"
-	sleep 0.5
-	./mods gputest.js -oqa -dramclk_percent 100 -matsinfo -poll_interrupts -rmkey RmPmgrPwrTopology2xSupport 1 -rmkey RmPmgrPwrPolicy3xSupport 1 -rmkey RmPmgrPwrPolicy3xLimitScale 100 -skip 147
-	sleep 0.5
-	less mods.log
-}
-
-wykonaj_test_chinczyka() {
 	clear
-	cd "$folder_mods"
+	echo "seria: $seria"
+	echo "folder: $folder_mods"
+	sleep 1
+	./mods gputest.js -timeout_ms 60000 -print_enter_code -run_on_error -clk_mhz dram +2.pct,0.all -clk_mhz dram +2.pct,3.all -vfe_var_range fuse 4 1 1 -vfe_var_range fuse 5 1 1 -enable_override_ovoc -check_linkwidth 0 16 16 -check_linkspeed 0 8000,16000 -print_inforom_remapped_rows -max_per_bank_remapped_rows 2 -max_total_remapped_rows 32 -freq_clk_domain_offset_khz gpc 30000 -skip 78 -bg_int_temp 5000 -bg_power 5000 -dump_stats -testarg 350 Verbose true -dev all -memtmp_range_time 30 74 1000 -test 632,0.max -fan_speed 63,63 -bg_fan 1000 -bg_dram_temp 1000 -bg_int_temp 1000
 	sleep 0.5
-	./mods gputest.js -oqa -dramclk_percent 100 -test 242 -test 19 -test 166 loops 5 -dramclk +1pct
-	sleep 0.5
+	cp -r mods.log ../test_nic_$(date +%Y-%m-%d_%H-%M-%S).log
+	sleep 1
 	less mods.log
+	wykonaj_usun_log ## usuwa logi z tego folderu
 }
 
 yo() {
 	clear
 	echo "yoyoyoyoyo"
-	sleep 5.5
+	sleep 3
 }
 
 NO_FORMAT="\033[0m"
@@ -300,6 +350,7 @@ C_GREEN="\033[48;5;2m"
 C_RED1="\033[48;5;196m"
 C_DODGERBLUE1="\033[48;5;33m"
 C_SILVER="\033[48;5;7m"
+C_Z="\033[48;5;45m"
 
 clear
 cat logo_color
@@ -309,12 +360,16 @@ while true; do
 	cat logo
 	echo "Wybierz:"
 	echo -e "1. ${C_GREY0}${C_GREEN}               Nvidia              ${NO_FORMAT}"
+	echo " "
 	echo -e "2. ${C_GREY0}${C_RED1}                AMD                ${NO_FORMAT}"
-	echo -e "3. ${C_GREY0}${C_DODGERBLUE1}               Intel               ${NO_FORMAT}"
+	echo " "
+	echo -e "3. ${C_GREY0}${C_Z}               Intel               ${NO_FORMAT}"
 	echo "   -----------------------------------"
 	echo -e "7. ${C_GREY0}${C_SILVER}                Inne               ${NO_FORMAT}"
+	echo " "
 	echo -e "8. ${C_GREY0}${C_SILVER}              Usun logi            ${NO_FORMAT}"
-	echo "q.                Quit w.          "
+	echo " "
+	echo "q.                 Quit w          "
 	read choice
 	case $choice in
 	1) #menu Nvidia)
@@ -329,6 +384,8 @@ while true; do
 			echo "4. Seria 4000"
 			echo "5. Seria 5000"
 			echo "q. Back"
+			echo "w. Power Off"
+			echo "e. Exit"
 			read choice
 			case $choice in
 				1) #seria 1)
@@ -354,17 +411,19 @@ while true; do
 					echo "1. GA102 (3080, 3090, 3090 Ti)"
 					echo "2. GA104 (3060, 3060 Ti, 3070, 3070 Ti)"
 					echo "q. Back"
+					echo "w. Power Off"
+					echo "e. Exit"
 					read choice
 					case $choice in
 						1) #GA102)
 							folder_mods="488.219-3080-3090"
-							seria="Seria 3000: GA102 (3080, 3090, 3090 Ti)"	
+							seria="Seria 3000: GA102 - (3080, 3090, 3090 Ti)"	
 							folder_nvmt="nvmt34"			
 							wykonaj_menu_test
 							;;
 						2) #GA104)
 							folder_mods="466.107-3060-3070ti"
-							seria="Seria 3000: GA104 (3060, 3060 Ti, 3070, 3070 Ti)"	
+							seria="Seria 3000: GA104 - (3060, 3060 Ti, 3070, 3070 Ti)"	
 							folder_nvmt="nvmt34"					
 							wykonaj_menu_test
 							;;
@@ -373,6 +432,9 @@ while true; do
 							;;
 						w)
 							poweroff
+							;;
+						e)
+							exit
 							;;
 						*)
 							clear
@@ -393,17 +455,19 @@ while true; do
 					echo "1. AD102 AD104 (4060 Ti, 4070, 4070 Ti, 4080, 4090)"
 					echo "2. AD103 (4070 Super Ti)"
 					echo "q. Back"
+					echo "w. Power Off"
+					echo "e. Exit"
 					read choice
 					case $choice in
 						1)
 							folder_mods="520.175-4060ti-4080"
-							seria="Seria 4000: AD102 AD104 (4060 Ti, 4070, 4070 Ti, 4080, 4090)"
+							seria="Seria 4000: AD102 AD104 - (4060 Ti, 4070, 4070 Ti, 4080, 4090)"
 							folder_nvmt="nvmt34"
 							wykonaj_menu_test
 							;;
 						2)
 							folder_mods="520.249-AD103"
-							seria="Seria 4000: AD103 (4070 Super Ti)"
+							seria="Seria 4000: AD103 - (4070 Super Ti)"
 							folder_nvmt="nvmt34"
 							wykonaj_menu_test
 							;;
@@ -412,6 +476,9 @@ while true; do
 							;;
 						w)
 							poweroff
+							;;
+						e)
+							exit
 							;;
 						*)
 							clear
@@ -435,7 +502,10 @@ while true; do
 					;;	
 				w)
 					poweroff
-					;;									
+					;;
+				e)
+					exit
+					;;	
 				*)
 					clear
 					echo "Nope"
@@ -558,7 +628,7 @@ while true; do
 					;;
 				e)
 					clear
-					Exit
+					exit
 					;;
 				*)
 					clear
@@ -601,7 +671,7 @@ while true; do
 		;;
 	e)
 		clear
-		Exit
+		exit
 		;;
 	*)
 		clear
