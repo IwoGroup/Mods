@@ -1,28 +1,19 @@
-./#!/bin/bash
+#!/bin/bash
 
 wykonaj_testowo() {
 	clear
-	cd "$folder_mods"
-	clear
-	echo "seria: $seria"
-	echo "folder: $folder_mods"
-	sleep 1
-	./mods gputest.js -oqa -test 1 -test 2 -test 3 -test 4 -test 5 -test 6 -test 7 -test 8 -test 9 -test 10
-	sleep 0.5
-	cp -r mods.log ../test3_$(date +%Y-%m-%d_%H-%M-%S).log
-	less mods.log
-	wykonaj_usun_log ## usuwa logi z tego folderu
 }
 
-wykonaj_usun() { #usuwa logi w danym folderze
+wykonaj_usun() { #usuwa logi w danym folderze; używane
 	clear
 	rm *.txt *.log
+	rm mods.mle
 	clear
 	echo "usuwanie..."
 	sleep 0.5
 }
 
-wykonaj_usun_log() { #usuwa log modsa
+wykonaj_usun_log() { #usuwa log modsa; używane w testach
 	sleep 0.5
 	rm mods.log
 	clear
@@ -43,19 +34,19 @@ echo " "
 echo "$seria" ##seria jest ustawiana przy wyborze odpowiedniej karty w menu
 echo " "
 echo "Wybierz Test:"
-echo "1. Mods & Mats + Power Off"
-echo "2. Mods + Power Off"
-echo "3. Mats gpu 2 + Power Off"
+echo "1. Mods + Mats (n1) + Power Off + usuwa stare logi"
+echo "2. Mods             + Power Off + usuwa stare logi"
+echo "3. Mats (n1)        + Power Off + usuwa stare logi"
+echo "4. Mods             + usuwa stare logi"
+echo " "
 echo "   -------- wymaga obrazu z testowanego gpu --------"
-echo "4. Mats"
-echo "5. Test 2 - GLStress - ok 20s"
-echo "pl. Test 3 - MatsTest - ok 20s"
-echo "12. Test niczego - ..."
+echo " "
+echo "5. Sam Mats 5mb     + usuwa logi"
+echo "22. Test 2 - GLStress - ok 20s"
+echo "33. Test 3 - MatsTest - ok 20s"
 echo "94. Test 94 - NewWfMats - ok 30s"
 echo "123. Test 123 - NewWfMatsBus - ok 30s"
 echo "178. Test 178 - WfMatsBgStress - stress test - ok 100s"
-echo "999. Testowo"
-echo "yo"
 echo " "
 echo "q. Back"
 echo "w. Power off"
@@ -63,30 +54,37 @@ echo "e. Exit"
 read choice
 case $choice in
 	1)
-		wykonaj_mods_mats
+		wykonaj_usun
+		wykonaj_mods
+		wykonaj_mats_n1
+		poweroff
 		;;
 	2)
+		wykonaj_usun
 		wykonaj_mods
+		poweroff
 		;;
 	3)
+		wykonaj_usun
 		wykonaj_mats_n1
+		poweroff
 		;;
 	4)
-		wykonaj_mats
-		cd ..
+		wykonaj_usun
+		wykonaj_mods
 		;;
 	5)
+		wykonaj_usun
+		wykonaj_mats
+		;;
+	22)
 		wykonaj_test2
 		cd ..
 		;;
-	pl)
+	33)
 		wykonaj_test3
 		cd ..
 		;;
-	12)
-		wykonaj_test_nic
-		cd ..
-		;;	
 	94)
 		wykonaj_test94
 		cd ..
@@ -103,10 +101,6 @@ case $choice in
 		wykonaj_testowo
 		cd ..
 		;;
-	yo)
-		yo
-		sleep 1
-		;;
 	q)
 		break
 		;;
@@ -117,7 +111,7 @@ case $choice in
 		exit
 		;;
 	*)
-		if declare -f "$choice" > /dev/null 2>&1; 
+		if declare -f "$choice" > /dev/null 2>&1;
 			then
 			echo "Wywoluje funkcje: $choice"
 			sleep 1
@@ -131,105 +125,49 @@ case $choice in
 done
 }
 
-wykonaj_mods_mats() {
-	wykonaj_usun #usuwa logi z folderu - home w tym przypadku
+wykonaj_mods() {
 	clear
 	echo "$seria"
 	sleep 1
-	cd $folder_mods
+	$folder_mods/mods gputest.js -skip_rm_state_init -oqa
 	sleep 1
-	./mods gputest.js -skip_rm_state_init -oqa
+	mv mods.log mods_$(date +%Y-%m-%d_%H-%M-%S).log
+	echo "skopiowano logi modsa"
 	sleep 1
-	/home/tetris.sh
-	./mats -n 1 -e 5
-	sleep 1
-	cp -r report.txt ../mats_$(date +%Y-%m-%d_%H-%M-%S).txt
-	sleep 1
-	rm report.txt
-	cd ..
 	cd $folder_nvmt
 	./mt.sh
 	sleep 1
-	cp -r mt.log ../mt_$(date +%Y-%m-%d_%H-%M-%S).log
+	cp mt.log ../mt_$(date +%Y-%m-%d_%H-%M-%S).log
+	echo "skopiowano logi mt"
 	sleep 1
 	rm mt.log
+	cd .. #do home
 	sleep 1
-	cd ..
-	cd $folder_mods
-	cp -r mods.log ../mods_$(date +%Y-%m-%d_%H-%M-%S).log
-	sleep 1
-	rm mods.log
-	sleep 1
-	poweroff
+	clear
 }
 
-wykonaj_mods() {
-	wykonaj_usun #usuwa logi z folderu - home w tym przypadku
+wykonaj_mats() {
 	clear
 	echo "$seria"
 	sleep 1
-	cd $folder_mods
+	$folder_mods/mats -e 25
+	sleep 1	
+	mv report.txt mats_$(date +%Y-%m-%d_%H-%M-%S).txt
+	echo "skopiowano logi matsa"
 	sleep 1
-	./mods gputest.js -skip_rm_state_init -oqa
-	sleep 1
-	cp -r mods.log ../mods_$(date +%Y-%m-%d_%H-%M-%S).log
-	sleep 1
-	cd ..
-	cd $folder_nvmt
-	./mt.sh
-	sleep 1
-	cp -r mt.log ../mt_$(date +%Y-%m-%d_%H-%M-%S).log
-	sleep 1
-	rm mt.log
-	sleep 1
-	cd ..
-	cd $folder_mods
-	sleep 1
-	rm mods.log
-	sleep 1
-	poweroff
+	clear
 }
 
 wykonaj_mats_n1() {
-	wykonaj_usun #usuwa logi z folderu - home w tym przypadku
 	clear
 	echo "$seria"
 	sleep 1
-	cd $folder_mods
+	tetris.sh & $folder_mods/mats -n 1 -e 5 && pkill beep
 	sleep 1
-	./mats -n 1 -e 5
-	sleep 1
-	cp -r report.txt ../mats_n1_$(date +%Y-%m-%d_%H-%M-%S).txt
-	sleep 1
-	rm report.txt
-	sleep 1
-	poweroff
-}
-wykonaj_mats() {
-	#wykonaj_usun #usuwa logi z folderu - home w tym przypadku
-	clear
-	echo "$seria"
-	sleep 1
-	cd $folder_mods
-	sleep 1
-	./mats -e 5
-	sleep 1
-	cp -r report.txt ../mats_$(date +%Y-%m-%d_%H-%M-%S).txt
+	mv report.txt mats_$(date +%Y-%m-%d_%H-%M-%S).txt
+	echo "skopiowano logi matsa"
 	sleep 1
 	clear
-	sleep 0.5
-	less report.txt
-	sleep 0.5
-	rm report.txt
-	clear
-	echo "kopia raportu jest w folderze home"
-	sleep 0.5
-	echo "3"
-	sleep 0.5
-	echo "2"
-	sleep 0.5
-	echo "1"
-	sleep 0.5
 }
 
 wykonaj_5090() { #brak
@@ -321,27 +259,6 @@ wykonaj_test178() {
 	cp -r mods.log ../test178_$(date +%Y-%m-%d_%H-%M-%S).log
 	less mods.log
 	wykonaj_usun_log ## usuwa logi z tego folderu
-}
-
-wykonaj_test_nic() {
-	clear
-	cd "$folder_mods"
-	clear
-	echo "seria: $seria"
-	echo "folder: $folder_mods"
-	sleep 1
-	./mods gputest.js -timeout_ms 60000 -print_enter_code -run_on_error -clk_mhz dram +2.pct,0.all -clk_mhz dram +2.pct,3.all -vfe_var_range fuse 4 1 1 -vfe_var_range fuse 5 1 1 -enable_override_ovoc -check_linkwidth 0 16 16 -check_linkspeed 0 8000,16000 -print_inforom_remapped_rows -max_per_bank_remapped_rows 2 -max_total_remapped_rows 32 -freq_clk_domain_offset_khz gpc 30000 -skip 78 -bg_int_temp 5000 -bg_power 5000 -dump_stats -testarg 350 Verbose true -dev all -memtmp_range_time 30 74 1000 -test 632,0.max -fan_speed 63,63 -bg_fan 1000 -bg_dram_temp 1000 -bg_int_temp 1000
-	sleep 0.5
-	cp -r mods.log ../test_nic_$(date +%Y-%m-%d_%H-%M-%S).log
-	sleep 1
-	less mods.log
-	wykonaj_usun_log ## usuwa logi z tego folderu
-}
-
-yo() {
-	clear
-	echo "yoyoyoyoyo"
-	sleep 3
 }
 
 NO_FORMAT="\033[0m"

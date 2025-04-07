@@ -4,10 +4,32 @@ __________       .__
  |    |   \  ___/|  |_\  ___/ / __ \_\___ \\  ___/ 
  |____|_  /\___  >____/\___  >____  /____  >\___  >
         \/     \/          \/     \/     \/     \/ 
+Ver. 1.9
+- optymalizacja kodu
+- wersja ostateczna
+- autostart
+
+========================================================
+Ver. 1.8.7
+- muzyka podczas wykonywania matsa w głównym teście
+
+========================================================
+Ver. 1.8.6
+- BEEP!!!!
+
+========================================================
+Ver. 1.8.5
+- dodanie opcji samego matsa
+- dodanie innych testów
+- małe szmery bajery
+- dodanie kopiowania logów z testów  do folderu home
+
+========================================================
 Ver. 1.8.4
 - dodanie opcji samego modsa
 - lekka poprawka menu testów
 - dodanie opcji exit
+- dodanie badapple
 
 ========================================================
 Ver. 1.8.3
@@ -76,11 +98,9 @@ ___________      ________
   |    |(  <_> )  |    `   (  <_> ) /\ 
   |____| \____/  /_______  /\____/  \/ 
 
-        
-- Dodanie muzyczki po wykonanym teście - https://github.com/ShaneMcC/beeps
+
 - Test Serii 5000 nvidia
 - Dodanie startu testo po nazwie kodowej rdzenia. 
-- dodać badapple - https://github.com/Error916/Bad_Apple_frames https://www.reddit.com/r/unixporn/comments/n13r71/bad_apple_on_linux_terminal_dwm/
 - auto wykrywanie karty i szukanie odpowiedniego folderu na jej podstawie
-- dodanie zmiennych z róźnymi testami
 - tmux - statyczne biblioteki i instalacja na tinylinux - kilka okien
+- aktualizator
