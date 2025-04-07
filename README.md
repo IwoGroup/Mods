@@ -15,27 +15,15 @@ Wymagania:
 - dodatkowa karta graficzna wymagana (dedykowana) mats z integrą ma złe ustawienia
 - nie działa z LHR
 
-test2
-- nie działa z LHR
+Test 2 - GLStress - ok 20s
 
-test94
-- nie działa z LHR
+Test 3 - MatsTest - ok 20s
 
-test108
-- nie działa z LHR
+Test 94 - NewWfMats - ok 30s
 
-test178
-- nie działa z LHR
-- karta w slocie pcie x16
+123. Test 123 - NewWfMatsBus - ok 30s
 
-test295
-- nie działa z LHR
-
-test niemca
-- nie działa z LHR
-
-test chinczyka
-- nie działa z LHR
+178. Test 178 - WfMatsBgStress - stress test - ok 100s
 
 
 ```
@@ -43,7 +31,6 @@ Error code:
 505 - Memory adress training  - uszkodzona pamięć
 
 ```
-
 
 
 
@@ -67,8 +54,6 @@ Vtech
 
 Mr. Niemiec
 
-Mr. Chińczyk
+Mr. od Snake - https://github.com/pjhades/bash-snake
 
-Mr. od Snake
-
-Mr. od Bad Apple
+Mr. od Bad Apple - https://github.com/Error916/Bad_Apple_frames
