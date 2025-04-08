@@ -1,10 +1,11 @@
 Instrukcja:
 
-1. USB z linuxem
-2. Wklej pliki z home.zip: https://drive.google.com/file/d/1hxMrx7cYtj3ogjFBUt2ntjFYqsCU3756/view?usp=drive_link
-3. (zaktualizuj pliki powyżej)
-4. Włącz ./full.sh
-5. Done
+1. Zrób bootowalny USB z linuxem (najlepiej użyj obrazu modsa): https://disk.yandex.com/d/4qHL_6D3VaSjCg
+2. Wypakuj pliki z home.zip do folderu home na pendrive: https://drive.google.com/file/d/192d6mwVxgBgO9CF7pUgcI3nnLCmKv_tk/view?usp=sharing
+   *ważne aby folder maiały odpowiednie nazwy
+4. Zaktualizuj pliki powyżej (pierw wszystkie, a w przyszłości "full.sh" w folderze home wystarczy)
+5. Zbootuj pendrive - skrypt powinien włączyć się automatycznie lub wpisz ./full.sh i zatwierdź
+6. Wybierz test
 
 
 
@@ -12,7 +13,7 @@ Wymagania:
 
 "Mods + Mats" (należy używać gdy występuje kod 43 a karta jest wykrywana)
 - test służu do wstępnej diagnozy - jeżeli pamięci są uszkodzone to inne testy się nie odpalą
-- dodatkowa karta graficzna wymagana (dedykowana) mats z integrą ma złe ustawienia
+- wymagana (dedykowana) dodatkowa karta graficzna mats z integrą ma złe ustawienia
 - nie działa z LHR
 
 Test 2 - GLStress - ok 20s
@@ -57,3 +58,7 @@ Mr. Niemiec
 Mr. od Snake - https://github.com/pjhades/bash-snake
 
 Mr. od Bad Apple - https://github.com/Error916/Bad_Apple_frames
+
+Mr. beep man - https://github.com/ShaneMcC/beeps/tree/master
+
+Mr. buyanigor - https://vlab.su/viewtopic.php?t=124090&f=48
