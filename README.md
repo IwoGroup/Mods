@@ -1,17 +1,20 @@
 Instrukcja:
 
-0. pełny obraz iso: https://drive.google.com/file/d/1L750Od_SjFVszWVGl3U0OelBYlY-RM31/view?usp=sharing
+0. pełny obraz iso: [https://drive.google.com/file/d/1L750Od_SjFVszWVGl3U0OelBYlY-RM31/view?usp=sharing](https://drive.google.com/file/d/14PQIt7h-fpQX2WXfK-W0xM_Lfo0nQ9yP/view?usp=drive_link)
+
+##
+
 
 
 1. Zrób bootowalny USB z linuxem (najlepiej użyj obrazu modsa): https://disk.yandex.com/d/4qHL_6D3VaSjCg
 2. Wypakuj pliki z home.zip do folderu home na pendrive: https://drive.google.com/file/d/192d6mwVxgBgO9CF7pUgcI3nnLCmKv_tk/view?usp=sharing
    *ważne aby folder maiały odpowiednie nazwy
-4. Zaktualizuj pliki powyżej (pierw wszystkie, a w przyszłości "full.sh" w folderze home wystarczy)
-5. Zbootuj pendrive - skrypt powinien włączyć się automatycznie lub wpisz ./full.sh i zatwierdź
-6. Wybierz test
+3. Zaktualizuj pliki powyżej (pierw wszystkie, a w przyszłości "full.sh" w folderze home wystarczy)
+4. Zbootuj pendrive - skrypt powinien włączyć się automatycznie lub wpisz ./full.sh i zatwierdź
+5. Wybierz serię oraz test.
 
 
-
+##
 Wymagania:
 
 "Mods + Mats" (należy używać gdy występuje kod 43 a karta jest wykrywana)
@@ -37,7 +40,7 @@ Error code:
 ```
 
 
-
+##
 
 
 ```                                                                            
