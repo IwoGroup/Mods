@@ -1,4 +1,5 @@
 Instrukcja:
+
 0. pełny obraz iso: https://drive.google.com/file/d/1L750Od_SjFVszWVGl3U0OelBYlY-RM31/view?usp=sharing
 
 
