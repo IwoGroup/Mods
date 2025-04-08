@@ -1,4 +1,6 @@
 Instrukcja:
+0. pełny obraz iso: https://drive.google.com/file/d/1L750Od_SjFVszWVGl3U0OelBYlY-RM31/view?usp=sharing
+
 
 1. Zrób bootowalny USB z linuxem (najlepiej użyj obrazu modsa): https://disk.yandex.com/d/4qHL_6D3VaSjCg
 2. Wypakuj pliki z home.zip do folderu home na pendrive: https://drive.google.com/file/d/192d6mwVxgBgO9CF7pUgcI3nnLCmKv_tk/view?usp=sharing
@@ -62,3 +64,5 @@ Mr. od Bad Apple - https://github.com/Error916/Bad_Apple_frames
 Mr. beep man - https://github.com/ShaneMcC/beeps/tree/master
 
 Mr. buyanigor - https://vlab.su/viewtopic.php?t=124090&f=48
+
+Rufus - https://rufus.ie/pl/
