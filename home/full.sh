@@ -34,14 +34,14 @@ echo " "
 echo "$seria" ##seria jest ustawiana przy wyborze odpowiedniej karty w menu
 echo " "
 echo "Wybierz Test:"
-echo "1. Mods + Mats (n1) + Power Off + usuwa logi"
-echo "2. Mods + Power Off + usuwa logi"
-echo "3. Mats (n1) + Power Off + usuwa logi"
-echo "4. Mods + usuwa logi"
+echo "1. Mods + Mats (n1) + Power Off + usuwa stare logi"
+echo "2. Mods             + Power Off + usuwa stare logi"
+echo "3. Mats (n1)        + Power Off + usuwa stare logi"
+echo "4. Mods             + usuwa stare logi"
 echo " "
 echo "   -------- wymaga obrazu z testowanego gpu --------"
 echo " "
-echo "5. Sam Mats 5mb + usuwa logi"
+echo "5. Sam Mats 5mb     + usuwa logi"
 echo "22. Test 2 - GLStress - ok 20s"
 echo "33. Test 3 - MatsTest - ok 20s"
 echo "94. Test 94 - NewWfMats - ok 30s"
@@ -162,7 +162,7 @@ wykonaj_mats_n1() {
 	clear
 	echo "$seria"
 	sleep 1
-	tetris.sh & $folder_mods/mats -n 1 -e 5 && pkill beep
+	melody.sh & $folder_mods/mats -n 1 -e 5 && pkill beep
 	sleep 1
 	mv report.txt mats_$(date +%Y-%m-%d_%H-%M-%S).txt
 	echo "skopiowano logi matsa"
@@ -501,7 +501,8 @@ while true; do
 		echo "4. Snake"
 		echo "5. Manual"
 		echo "6. Szukanie"
-		echo "7. Bad Apple"		
+		echo "7. Bad Apple"
+		echo "8. Beeper - melody.sh"
 		echo "q. Quit"
 		echo "w. Poweroff"
 		echo "e. Exit"
@@ -534,6 +535,9 @@ while true; do
 					./run.sh
 					sleep 0.5
 					cd /home
+					;;
+				8)
+					melody.sh
 					;;
 				q)
 					clear
