@@ -1,7 +1,43 @@
 #!/bin/bash
 
 wykonaj_testowo() {
+	folder_mods="520.239.test"
+	seria="$folder_mods"
+	folder_nvmt="nvmt34"
 	clear
+	echo "Test"
+	sleep 2
+	clear
+	echo "$seria"
+	sleep 1
+	$folder_mods/mods gputest.js -skip_rm_state_init -oqa
+	sleep 1
+	mv mods.log mods_$(date +%Y-%m-%d_%H-%M-%S).log
+	echo "skopiowano logi modsa"
+	sleep 1
+	cd $folder_nvmt
+	./mt.sh
+	sleep 1
+	cp mt.log ../mt_$(date +%Y-%m-%d_%H-%M-%S).log
+	echo "skopiowano logi mt"
+	sleep 1
+	#wykonaj_bios
+	rm mt.log
+	cd .. #do home
+	sleep 1
+	clear
+	echo -ne '\007'
+	poweroff
+}
+
+wykonaj_bios() {
+	mvmt vbios
+	sleep 1
+	cp bios.log ../bios_$(date +%Y-%m-%d_%H-%M-%S).log
+	sleep 1
+	echo "skopiowano logi bios"
+	sleep 1
+	rm bios.log
 }
 
 wykonaj_usun() { #usuwa logi w danym folderze; używane
@@ -13,9 +49,9 @@ wykonaj_usun() { #usuwa logi w danym folderze; używane
 	sleep 0.5
 }
 
-wykonaj_usun_log() { #usuwa log modsa; używane w testach
+wykonaj_usun_log() { #usuwa logi; używane w testach
 	sleep 0.5
-	rm mods.log
+	rm *.log
 	clear
 	echo "kopia raportu jest w folderze home"
 	sleep 0.5
@@ -37,16 +73,18 @@ echo "Wybierz Test:"
 echo "1. Mods + Mats (n1) + Power Off + usuwa stare logi"
 echo "2. Mods             + Power Off + usuwa stare logi"
 echo "3. Mats (n1)        + Power Off + usuwa stare logi"
-echo "4. Mods             + usuwa stare logi"
 echo " "
 echo "   -------- wymaga obrazu z testowanego gpu --------"
 echo " "
-echo "5. Sam Mats 5mb     + usuwa logi"
+echo "4. Mods"
+echo "5. Sam Mats 5mb"
 echo "22. Test 2 - GLStress - ok 20s"
 echo "33. Test 3 - MatsTest - ok 20s"
 echo "94. Test 94 - NewWfMats - ok 30s"
 echo "123. Test 123 - NewWfMatsBus - ok 30s"
 echo "178. Test 178 - WfMatsBgStress - stress test - ok 100s"
+echo "997. mt.sh"
+echo "999. Testowo"
 echo " "
 echo "q. Back"
 echo "w. Power off"
@@ -70,11 +108,9 @@ case $choice in
 		poweroff
 		;;
 	4)
-		wykonaj_usun
 		wykonaj_mods
 		;;
 	5)
-		wykonaj_usun
 		wykonaj_mats
 		;;
 	22)
@@ -97,9 +133,11 @@ case $choice in
 		wykonaj_test178
 		cd ..
 		;;
+	997)
+		mt_sh
+		;;
 	999)
 		wykonaj_testowo
-		cd ..
 		;;
 	q)
 		break
@@ -123,6 +161,19 @@ case $choice in
 		;;
 	esac
 done
+}
+
+wykonaj_mats() {
+	cd $folder_nvmt
+	./mt.sh
+	sleep 1
+	cp mt.log ../mt_$(date +%Y-%m-%d_%H-%M-%S).log
+	sleep 1
+	less mt.log
+	wykonaj_usun_log ## usuwa logi z tego folderu
+	cd .. #do home
+	sleep 1
+	clear	
 }
 
 wykonaj_mods() {
@@ -275,6 +326,7 @@ sleep 1
 while true; do
 	clear
 	cat logo
+	echo " "
 	echo "Wybierz:"
 	echo -e "1. ${C_GREY0}${C_GREEN}               Nvidia              ${NO_FORMAT}"
 	echo " "
@@ -295,7 +347,7 @@ while true; do
 			cat Nvidia
 			echo " "
 			echo "Wybierz:"
-			echo "1. Seria 1000"
+			echo "1. Seria 1000 (!)"
 			echo "2. Seria 2000"
 			echo "3. Seria 3000"
 			echo "4. Seria 4000"
@@ -306,15 +358,24 @@ while true; do
 			read choice
 			case $choice in
 				1) #seria 1)
-					folder_mods="367.56-10xx"
-					seria="Seria 1000: GP102, GP104, GP106, GP107, GP108"	
-					folder_nvmt="nvmt1"	
-					wykonaj_menu_test
+					clear
+					echo " "
+					echo "Uwaga, seria 1000 (GTX) wymaga innego pendrive!"
+					echo " "
+					echo "kick za: 3"
+					sleep 1
+					echo "kick za: 2"
+					sleep 1
+					echo "kick za: 1"
+					sleep 1	
 					;;
 				2) #seria 2)
 					folder_mods="400.281-20xx"
 					seria="Seria 2000: TU102, TU104, TU106, TU116, TU117"
 					folder_nvmt="nvmt2"
+					clear
+					echo "lepiej użyj drugiego pendrive!"
+					sleep 4
 					wykonaj_menu_test
 					;;
 				3) #seria 3)
@@ -355,7 +416,7 @@ while true; do
 							;;
 						*)
 							clear
-							echo "Nope"
+							echo "Wybierz ponownie."
 							sleep 0.5
 							;;
 					esac
@@ -399,7 +460,7 @@ while true; do
 							;;
 						*)
 							clear
-							echo "Nope"
+							echo "Wybierz ponownie."
 							sleep 0.5
 							;;
 					esac
@@ -425,60 +486,24 @@ while true; do
 					;;	
 				*)
 					clear
-					echo "Nope"
-					sleep 0.3
+					echo "Wybierz ponownie."
+					sleep 0.5
 					;;
 		esac
 		done
 		;;
 	2) # menu AMD)
-#		while true; do
 				clear
 				cat Radeon
 				echo " "
-				echo "Brak. kick za: 3"
+				echo "Wymaga innego pendrive!"
+				echo " "
+				echo "kick za: 3"
 				sleep 1
-				echo "Brak. kick za: 2"
+				echo "kick za: 2"
 				sleep 1
-				echo "Brak. kick za: 1"
-				sleep 1
-#				echo "Wybierz:"
-#				echo "1. Seria 5000"
-#				echo "2. Seria 6000"
-#				echo "3. Seria 7000"
-#				echo "4. Seria 9000"
-#				echo "q. Back"
-#				read choice
-#				case $choice in
-#				1) #seria 1)
-#					clear
-#					echo "Brak"
-#					sleep 1
-#					;;
-#				2) #seria 2)
-#					clear
-#					echo "Brak"
-#					sleep 1
-#					;;
-#				3) #seria 3)
-#					clear
-#					echo "Brak"
-#					sleep 1
-#					;;
-#				4) #seria 4)
-#					clear
-#					echo "Brak"
-#					sleep 1
-#					;;
-#				q) 
-#					break
-#					;;										
-#				*)
-#					clear
-#					echo "Nope"
-#					sleep 0.3
-#			esac
-#		done	
+				echo "kick za: 1"
+				sleep 1	
 		;;
 	3) # menu Intel)
 			clear
@@ -553,7 +578,7 @@ while true; do
 					;;
 				*)
 					clear
-					echo "Nope"
+					echo "Wybierz ponownie."
 					sleep 0.5
 				;;
 			esac
@@ -562,9 +587,6 @@ while true; do
 	8)
 		clear
 		wykonaj_usun
-		cd 367.56-10xx
-		wykonaj_usun
-		cd ..
 		cd 400.281-20xx
 		wykonaj_usun
 		cd ..
@@ -596,8 +618,8 @@ while true; do
 		;;
 	*)
 		clear
-		echo "Nope"
-		sleep 0.3
+		echo "Wybierz ponownie."
+		sleep 0.5
 		;;
 	esac
 done
